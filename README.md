@@ -1,24 +1,18 @@
 프로젝트 소개
 
-프로젝트 명 : 무비리뷰 Movie Review
+프로젝트 명 : 음악 추천 & 리뷰
 
 프론트앤드
 - Claude
 - React-Bootstrap
-- 로고 채찍피티
+- Tailwind
 
 UI 벤치마킹
 - 네이버 시리즈온
 
 
-영화 API
-- https://www.kmdb.or.kr/info/api/apiDetail/6
-- https://www.themoviedb.org/
-- https://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do - 영화진흥원 API
-
-영화 API 확인 사항
-- 영화상영여부
-- 영화상영 위치? 상영관?(API지도와 연동을 위함)
+음악 API
+- https://www.last.fm/api
 
 
 프로젝트 기능
@@ -26,20 +20,15 @@ UI 벤치마킹
 1. 로그인/회원가입
   - SNS로그인(Oauth) / JWT / 
 
-2. 영화목록 - 최신순
-3. 영화순위
-   - 영화진흥회 API 사용(영화목록 Call : searchMovieList)
-       
-4. 영화검색
-   - 필터검색
+2. 음원목록 - 최신순
+3. 음원순위      
+4. 음원검색
+   - 필터 검색
    - Speech API 검색
-5. 영화리뷰
+5. 음원리뷰
    - 별점리뷰 & 텍스트 리뷰
-7. 마이페이지-마이리뷰
-8. 마이페이지-최근본영화
-9. DB API Batch(단순 java)
-  - 영화목록(매일)
-영화순위 - 실시간 : 요청횟수 확인
+7. 마이페이지- 마이리뷰 
+8. 마이페이지- 나만의 플레이리스트
 
 데이터베이스
 Dev        : H2
