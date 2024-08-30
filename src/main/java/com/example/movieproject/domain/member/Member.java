@@ -1,21 +1,41 @@
 package com.example.movieproject.domain.member;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import java.util.*;
 
-@Data
-@Table
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@ToString (exclude = "memberRoleList")
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String email;
+    private String pw;
+    private String nickname;
+    private boolean social;
 
-    @Column(name = "NAME")
-    private String name;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<MemberRole> memberRoleList = new ArrayList<>();
 
-    @Column(name = "AGE")
-    private Integer age;
+    public void addRole(MemberRole memberRole){
+        memberRoleList.add(memberRole);
+    }
+    public void clearRole(){
+        memberRoleList.clear();
+    }
+    public void changeNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public void changePw(String pw){
+        this.pw = pw;
+    }
+    public void changeSocial(boolean social) {
+        this.social = social;
+    }
 
 }
