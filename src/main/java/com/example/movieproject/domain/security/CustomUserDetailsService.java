@@ -66,7 +66,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                         .stream()
                         .map(memberRole -> memberRole.name()).collect(Collectors.toList()));
 
-        log.info("--------------MemberDTO : "+memberDto);
         log.info("--------------loadUserByUsername End----------------");
         return memberDto;
     }
