@@ -51,12 +51,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
 
-
+        log.info("--------------getWithRoles STart----------------");
         Member member = memberRepository.getWithRoles(username);
         if(member == null){
             throw new UsernameNotFoundException("user name Not Found");
         }
-
+        log.info("--------------getWithRoles End----------------");
         MemberDTO memberDto = new MemberDTO(
                 member.getEmail(),
                 member.getPw(),
