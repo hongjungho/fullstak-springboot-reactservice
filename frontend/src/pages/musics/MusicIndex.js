@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import React from "react";
 import BasicLayout from "../../layouts/BasicLayout";
-import {Outlet, Link} from "react-router-dom";
 import ProgresSpin from "../../components/ProgresSpin";
+import { useEffect, useState } from "react";
+import {Outlet, Link} from "react-router-dom";
 
-const BoardIndex = ()=>{
+const MusicIndex = ()=>{
 
     let [datas, setDatas]     = useState([])
     let otherDatas = [];
@@ -32,14 +32,14 @@ const BoardIndex = ()=>{
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (loading)
-    {
-        return <ProgresSpin/>
-    }
+    if (loading) {
+        return (
+            <ProgresSpin/>
+        )}
     return (
         
-    <BasicLayout title={'Board List'}>
-        <h3 className="text-3xl font-bold">Board List 입니다.</h3>
+    <BasicLayout title={'Music Test'}>
+        <h3 className="text-3xl font-bold">Music Test 입니다.</h3>
         <div className="w-full text-right mt-10">
             <button className="border border-[#A2B29F] rounded bg-[#BDD2B6] hover:bg-[#A2B29F] w-20 h-8 text-white" >
                 <Link to={'/board/edit/'}>등록</Link>
@@ -69,4 +69,4 @@ const BoardIndex = ()=>{
     </BasicLayout>
     );
 }
-export default BoardIndex;
+export default MusicIndex;

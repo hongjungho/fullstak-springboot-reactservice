@@ -27,6 +27,11 @@
   color: #61dafb;
 }
 
+.slickCustArrow:before{
+  color:#B5C18E !important;
+  font-size:25px !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
