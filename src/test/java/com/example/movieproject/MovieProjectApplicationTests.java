@@ -20,7 +20,6 @@ class MovieProjectApplicationTests {
 
     @Test
     void testInsertUser() {
-        log.info("----------------------sequrity login test-------------------------");
         for (int i = 0; i < 10 ; i++) {
             Member member = Member.builder()
                     .email ("user"+i+"@test.com")
@@ -28,14 +27,12 @@ class MovieProjectApplicationTests {
                             .nickname ("USER"+i)
                             .build();
             member.addRole(MemberRole.USER);
-            log.info("_______________"+MemberRole.USER);
             if(i >= 5) {
                 member.addRole(MemberRole.MANAGER);
                 if (i >= 8) {
                     member.addRole(MemberRole.ADMIN);
                 }
             }
-            log.info("member Save " +member);
             memberRepository.save(member);
 
         }

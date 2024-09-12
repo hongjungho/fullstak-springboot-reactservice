@@ -15,7 +15,8 @@ const Mypage     = lazy(()=>import("../pages/MyPage"))
 const Board      = lazy(()=>import("../pages/board/BoardIndex"))
 const BrdDetail  = lazy(()=>import("../pages/board/BoardDetail"))
 const BrdEdit    = lazy(()=>import("../pages/board/BoardEdit"))
-const Login      = lazy(()=>import("../pages/Login"))
+const Login      = lazy(()=>import("../pages/member/Login"))
+const Logout      = lazy(()=>import("../pages/member/Logout"))
 
 const root = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const root = createBrowserRouter([
     {
         path:"login",
         element:<Suspense fallback={Loading}><Login/></Suspense>
+    },
+    {
+        path:"logout",
+        element:<Suspense fallback={Loading}><Logout/></Suspense>
     },
     {
         path:"board",

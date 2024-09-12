@@ -2,6 +2,8 @@ import logo from '../logo2.svg';
 import React from "react";
 import { Link } from "react-router-dom";
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+import { useSelector } from "react-redux";
+
 
 function onClickMenu()
 {
@@ -21,7 +23,7 @@ const BasicLayout = ({children, title}) => {
       pageUrl : '/board'
     }
   ];
-
+  const loginState = useSelector(state => state.loginSlice)
   return (<>
 <div className="min-h-full">
   <nav>
@@ -59,7 +61,15 @@ const BasicLayout = ({children, title}) => {
               <PopoverPanel className="flex flex-col absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1" achor="bottom start">
                 <Link to={'/mypage'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</Link>
                 <Link to={'#'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</Link>
-                <Link to={'/login'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white" role="menuitem" tabIndex="-1" id="user-menu-item-2">Log out</Link>
+                {loginState.email ? //로그인한 사용자만 출력되는 메뉴
+                    <>
+                      <Link to={'/logout'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white" role="menuitem" tabIndex="-1" id="user-menu-item-2">Log out</Link>
+                    </>
+                    :
+                    <>
+                      <Link to={'/login'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white" role="menuitem" tabIndex="-1" id="user-menu-item-2">Log in</Link>
+                    </>
+                }
               </PopoverPanel>
             </Popover>
           </div>
