@@ -12,7 +12,8 @@ const LoginComponent = () => {
     const [loginParam,setLoginParam] = useState({...initState})
     const dispatch = useDispatch()
     const handleClickLogin = (e) => {
-        dispatch(login(loginParam))
+        // dispatch(login(loginParam)) // 동기화된 호출
+        dispatch( loginPostAsync(loginParam) ) // loginSlice의 비동기 호출
     }
         const handleChange = (e) => {
         loginParam[e.target.name] = e.target.value
