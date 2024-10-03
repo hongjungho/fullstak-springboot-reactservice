@@ -32,7 +32,7 @@ public class BoardController
     }
     
     @GetMapping("/board")
-    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN')")
+//    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<List<BoardResponse>> list()
     {
         List<BoardResponse> boards = boardService.getList()
