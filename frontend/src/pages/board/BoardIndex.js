@@ -7,7 +7,7 @@ const BoardIndex = ()=>{
 
     let [datas, setDatas]     = useState([])
     let otherDatas = [];
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const callApi = ()=>{
         // const urlAddress = 'https://jsonplaceholder.typicode.com/users'
@@ -19,9 +19,12 @@ const BoardIndex = ()=>{
         .then((json) => {
             setDatas(json)
             otherDatas = json
-            console.log(json)
-            console.log(otherDatas)
-            console.log(datas)
+            console.log('json : ');
+            console.log(json);
+            console.log('otherDatas : ');
+            console.log(otherDatas);
+            console.log('datas : ');
+            console.log(datas);
             setLoading(false);
         });
     }
@@ -59,6 +62,7 @@ const BoardIndex = ()=>{
             </tr>
         </thead>
         <tbody>
+            {console.log(datas)}
             {datas.map((data, index)=>{
                 return (
                 <tr key={index}>
