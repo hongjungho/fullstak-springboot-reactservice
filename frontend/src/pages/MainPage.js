@@ -3,6 +3,7 @@ import BasicLayout from "../layouts/BasicLayout";
 import BasicSlider from "../components/BasicSlider"
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import {Outlet, Link} from "react-router-dom";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,9 +15,10 @@ const apiKey    = '2c7a7f34f3f8af01dcdae0baf5402da0';
 const format    = 'json';
 
 
-
 const MainPage = ()=>
 {
+  // 클라이언트와 서버가 통신할때 쿠키와 같은 인증 정보 값을 공유하겠다는 설정
+  // axios.defaults.withCredentials = true;
   console.log('md5 : ');
   console.log(md5('안녕하세요'));
 
@@ -26,39 +28,36 @@ const MainPage = ()=>
   
   
   const [datas, setDatas]     = useState([])
-  axios.get(requestUrl).then((response)=>{console.log(response.data.results.trackmatches.track);});
   const [token, setToken]     = useState('')
   const [loading, setLoading] = useState(false);
     
-  const getApiSession = ()=>{
+  // const getApiSession = ()=>{
     
-    let method = 'auth.gettoken';
-    let requestUrl = `${sourceUrl}?method=${method}&api_key=${apiKey}&format=${format}`;
-    axios.get(requestUrl, { withCredentials: true }).then((response)=>{setToken(response.data.token)}).then((data)=>{
-      
-      console.log('data : ');
-      console.log(data);
-
-      console.log('token : ');
-      console.log(token);
-      let requestAuth = `${authUrl}?api_key=${apiKey}&token=${token}`;
-      axios.get(requestAuth, { withCredentials: true }).then((response)=>{
-        console.log('requestAuth : ');
-        console.log(response);
+  //   let method = 'auth.gettoken';
+  //   let requestUrl = `${sourceUrl}?method=${method}&api_key=${apiKey}&format=${format}`;
+  //   axios.get(requestUrl, { withCredentials: true })
+  //        .then((response)=>{setToken(response.data.token)})
+  //        .catch((error)=>{console.log(error);});
+        
+  //   useEffect(()=>{
+  //     console.log('token : ');
+  //     console.log(token);
+  //     let requestAuth = `${authUrl}?api_key=${apiKey}&token=${token}`;
+  //     axios.get(requestAuth, { withCredentials: true }).then((response)=>{
+  //       console.log('requestAuth : ');
+  //       console.log(response);
   
-        setDatas(response.data);
+  //       setDatas(response.data);
   
-        setLoading(false);
-      });
-    }).catch((error)=>{console.log(error);});
-    // 클라이언트와 서버가 통신할때 쿠키와 같은 인증 정보 값을 공유하겠다는 설정
-    // { withCredentials: true }
-  }
+  //       setLoading(false)
+  //     });
+  //   },[token]);
+  // }
 useEffect(()=>{
-  getApiSession();
-
-  console.log(datas);
+  // getApiSession();
+  axios.get(requestUrl).then((response)=>{setDatas(response.data.results.trackmatches.track);setLoading(false);});
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  console.log('hey')
 }, []);
 
 if (loading) {
@@ -76,6 +75,31 @@ if (loading) {
     <div className="mb-10 p-20 slider-container w-full text-green-700">
       <BasicSlider/>
     </div>
+    <section>
+        <table className="table-auto mt-4 bg-slate-200 border-separate border-spacing-0 w-full rounded-[10px] overflow-hidden">
+        <thead>
+            <tr>
+            <th className="border-b border-r border-white">No.</th>
+            <th className="border-b border-r border-white">Name</th>
+            <th className="border-b border-r border-white">Artist</th>
+            <th className="border-b border-r border-white">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {datas.map((data, index)=>{
+                return (
+                <tr key={index}>
+                    <td className="border-b border-r border-white">{index+1}</td>
+                    <td className="border-b border-r border-white">{data.name}</td>
+                    <td className="border-b border-r border-white">{data.artist}</td>
+                    <td className="border-b border-r border-white"><Link to={data.url}>{data.artist}'s Link</Link></td>
+                </tr>
+                )
+            })}
+        </tbody>
+    </table>
+        <Outlet/>
+    </section>
     <section className="App-header mt-1">
       <img src={logo} className="App-logo mb-10" alt="logo" />
       <p>
