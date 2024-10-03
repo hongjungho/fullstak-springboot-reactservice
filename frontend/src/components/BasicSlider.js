@@ -15,7 +15,6 @@ function CustomNextArrow(props) {
   
   function CustomPrevArrow(props) {
     const { className, style, onClick } = props;
-    console.log(className);
     return (
       <button type="button"
         className={className + ' slickCustPrev'}

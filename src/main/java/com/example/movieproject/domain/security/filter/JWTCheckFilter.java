@@ -1,21 +1,23 @@
 package com.example.movieproject.domain.security.filter;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import com.example.movieproject.domain.member.MemberDTO;
 import com.example.movieproject.domain.util.JWTUtil;
 import com.google.gson.Gson;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 
 @Log4j2
 public class JWTCheckFilter extends OncePerRequestFilter {
@@ -35,6 +37,19 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(path.startsWith("/api/products/view/")) {
             return true;
         }
+        if(path.startsWith("/api/board/")) {
+            return true;
+        }
+        if(path.startsWith("/board/")) {
+            return true;
+        }
+        if(path.startsWith("/login")) {
+            return true;
+        }
+        if(path.startsWith("/")) {
+            return true;
+        }
+        
         return false;
     }
     @Override
@@ -50,13 +65,13 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             log.info("JWT claims: " + claims);
             // filterChain.doFilter(request, response);
 
-            String email = (String) claims.get("email");
-            String pw = (String) claims.get("pw");
-            String nickname = (String) claims.get("nickname");
-            Boolean social = (Boolean) claims.get("social");
+            String email           = (String) claims.get("email");
+            String pw              = (String) claims.get("pw");
+            String nickname        = (String) claims.get("nickname");
+            Boolean social         = (Boolean) claims.get("social");
             List<String> roleNames = (List<String>) claims.get("roleNames");
-            MemberDTO memberDTO = new MemberDTO(email,pw, nickname, social.
-                    booleanValue(),roleNames);
+            MemberDTO memberDTO    = new MemberDTO(email,pw, nickname, social.booleanValue(),roleNames);
+            
             log.info ("---------------------------------- ");
             log.info(memberDTO);
             log.info(memberDTO.getAuthorities());
