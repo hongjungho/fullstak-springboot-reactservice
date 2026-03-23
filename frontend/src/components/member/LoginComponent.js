@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { login } from "../../slices/loginSlice"
+import { loginPostAsync } from "../../slices/loginSlice"
 
 
 const initState = {
